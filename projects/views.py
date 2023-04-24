@@ -38,4 +38,4 @@ def create_project(request):
     context = {
         "form": form,
     }
-    return render(request, "projects/create_project.html", context)
+    return render(request, "projects/create.html", context)
