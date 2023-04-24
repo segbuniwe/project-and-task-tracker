@@ -1,39 +1,36 @@
 {% extends 'base.html' %}
 
 {% block title %}
-My Tasks
+    My Tasks
 {% endblock title %}
-
 {% block content %}
-<main>
-    <div>
-        <h1>My Tasks</h1>
-        {% if task_list|length > 0 %}
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Start Date</th>
-                        <th>Due Date</th>
-                        <th>Is Completed</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for task in task_list.all %}
-                    <tr>
-                        <td>{{ task.name }}</td>
-                        <td>{{ task.start_date }}</td>
-                        <td>{{ task.due_date }}</td>
-                        <td>{{ task.is_completed|yesno:"yes, no" }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <p>
-                You have no tasks
-            </p>
-        {% endif %}
-    </div>
-</main>
+    <main>
+        <div>
+            <h1>My Tasks</h1>
+            {% if task_list|length > 0 %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Start Date</th>
+                            <th>Due Date</th>
+                            <th>Is Completed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for task in task_list.all %}
+                            <tr>
+                                <td>{{ task.name }}</td>
+                                <td>{{ task.start_date }}</td>
+                                <td>{{ task.due_date }}</td>
+                                <td>{{ task.is_completed|yesno:"yes, no" }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>You have no tasks</p>
+            {% endif %}
+        </div>
+    </main>
 {% endblock content %}

@@ -1,38 +1,37 @@
 {% extends 'base.html' %}
 
 {% block title %}
-My Projects
+    My Projects
 {% endblock title %}
-
 {% block content %}
-<main>
-    <div>
-        <h1>My Projects</h1>
-        <p>
-            <a href="{% url 'create_project' %}">Create A New Project</a>
-        </p>
-        {% if project_list|length == 0 %}
+    <main>
+        <div>
+            <h1>My Projects</h1>
             <p>
-                You are not assigned to any projects
+                <a href="{% url 'create_project' %}">Create A New Project</a>
             </p>
-        {% else %}
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Number of tasks</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for project in project_list.all %}
-                    <tr>
-                        <td><a href="{% url 'show_project' project.id %}">{{ project.name }}</a></td>
-                        <td>{{ project.tasks.all|length }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        {% endif %}
-    </div>
-</main>
+            {% if project_list|length == 0 %}
+                <p>You are not assigned to any projects</p>
+            {% else %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Number of tasks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for project in project_list.all %}
+                            <tr>
+                                <td>
+                                    <a href="{% url 'show_project' project.id %}">{{ project.name }}</a>
+                                </td>
+                                <td>{{ project.tasks.all|length }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+    </main>
 {% endblock content %}
