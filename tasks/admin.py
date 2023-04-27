@@ -1,5 +1,5 @@
 from django.contrib import admin
-from tasks.models import Task
+from tasks.models import Task, Note
 
 # Register your models here.
 
@@ -13,4 +13,13 @@ class TaskAdmin(admin.ModelAdmin):
         "is_completed",
         "project",
         "assignee",
+    )
+
+
+@admin.register(Note)
+class NoteAdmin(admin.ModelAdmin):
+    list_display = (
+        "task",
+        "content",
+        "is_completed",
     )

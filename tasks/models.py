@@ -10,7 +10,7 @@ class Task(models.Model):
     start_date = models.DateTimeField()
     due_date = models.DateTimeField()
     is_completed = models.BooleanField(default=False)
-    color = models.CharField(max_length=7, default="green")
+    # color = models.CharField(max_length=7, default="green")
     project = models.ForeignKey(
         Project,
         related_name="tasks",
@@ -22,3 +22,16 @@ class Task(models.Model):
         on_delete=models.CASCADE,
         null=True,
     )
+
+    def __str__(self):
+        return self.name
+
+
+class Note(models.Model):
+    task = models.ForeignKey(
+        Task,
+        on_delete=models.CASCADE,
+        related_name='notes'
+    )
+    content = models.CharField(max_length=200)
+    is_completed = models.BooleanField(default=False)

@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from tasks.models import Task
+from tasks.models import Task, Note
 
 
 class TaskForm(ModelForm):
@@ -10,7 +10,16 @@ class TaskForm(ModelForm):
             "start_date",
             "due_date",
             "is_completed",
-            "color",
             "project",
             "assignee",
+        )
+
+
+class NoteForm(ModelForm):
+    class Meta:
+        model = Note
+        fields = (
+            "content",
+            "task",
+            "is_completed",
         )

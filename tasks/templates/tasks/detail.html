@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{% endblock title %}
+
+{% block content %}
+<main>
+    <div class="my-tasks-list">
+        <h1>{{ task_detail.name }}</h1>
+        <h2 class="create-project">Task Notes</h2>
+        <p class="create-project">
+            <a href="{% url 'create_note' %}">Create New Note</a>
+        </p>
+        {% if task_detail.notes.all|length > 0 %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Content</th>
+                    <th>Is Completed?</th>
+                    <th>Edit Note</th>
+                    <th>Delete Note</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for note in task_detail.notes.all %}
+            <tr>
+                <td>{{ note.content }}</td>
+                <td>{{ note.is_completed|yesno:"yes, no" }}</td>
+                <td>
+                    <a href="{% url 'note_update' note.id %}">Edit</a>
+                </td>
+                <td>
+                    <a href="{% url 'note_delete' note.id %}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <p>There are no notes for this task</p>
+        {% endif %}
+    </div>
+</main>
+{% endblock content %}

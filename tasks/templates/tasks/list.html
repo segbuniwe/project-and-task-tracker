@@ -14,7 +14,8 @@
                             <th>Name</th>
                             <th>Start Date</th>
                             <th>Due Date</th>
-                            <th>Is Completed</th>
+                            <th>Notes?</th>
+                            <th>Is Completed?</th>
                             <th>Edit Task</th>
                             <th>Delete Task</th>
                         </tr>
@@ -22,9 +23,12 @@
                     <tbody>
                         {% for task in task_list.all %}
                             <tr>
-                                <td>{{ task.name }}</td>
+                                <td>
+                                    <a href="{% url 'show_task' task.id %}">{{ task.name }}</a>
+                                </td>
                                 <td>{{ task.start_date }}</td>
                                 <td>{{ task.due_date }}</td>
+                                <td>{{ task.notes.all|length }}</td>
                                 <td>{{ task.is_completed|yesno:"yes, no" }}</td>
                                 <td>
                                     <a href="{% url 'task_list_update' task.id %}">Edit</a>
