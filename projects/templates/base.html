@@ -22,10 +22,10 @@
                         <ul>
                             {% if user.is_authenticated %}
                                 <li>
-                                    <a href="{% url 'show_my_tasks' %}">My Tasks</a>
+                                    <a href="{% url 'list_projects' %}">My Projects</a>
                                 </li>
                                 <li>
-                                    <a href="{% url 'list_projects' %}">My Projects</a>
+                                    <a href="{% url 'show_my_tasks' %}">My Tasks</a>
                                 </li>
                                 <li>
                                     <a href="{% url 'cal:calendar' %}">My Calendar</a>

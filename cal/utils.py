@@ -1,4 +1,4 @@
-# from datetime import datetime, timedelta
+from datetime import datetime, timezone
 from calendar import HTMLCalendar
 from tasks.models import Task
 
@@ -11,11 +11,15 @@ class Calendar(HTMLCalendar):
         super(Calendar, self).__init__()
 
     def formatday(self, day, tasks):
-        tasks_per_day = tasks.filter(due_date__day=day)
+        tasks_per_day = tasks.filter(due_date__day=day, assignee=self.assignee)
         d = ''
         for task in tasks_per_day:
+            due_date_aware = task.due_date.replace(tzinfo=timezone.utc)
+            now_date = datetime.now(timezone.utc)
             if task.is_completed is True:
                 d += f'<div style="background-color: lightgreen"><li> {task.name} </li></div>'
+            elif task.is_completed is False and due_date_aware < now_date:
+                d += f'<div style="background-color: orangered"><li> {task.name} </li></div>'
             else:
                 d += f'<li> {task.name} </li>'
 
