@@ -5,7 +5,7 @@
 {% endblock title %}
 {% block content %}
     <main>
-        <div>
+        <div class="my-tasks-list">
             <h1>My Tasks</h1>
             {% if task_list|length > 0 %}
                 <table>
@@ -15,6 +15,8 @@
                             <th>Start Date</th>
                             <th>Due Date</th>
                             <th>Is Completed</th>
+                            <th>Edit Task</th>
+                            <th>Delete Task</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -24,6 +26,12 @@
                                 <td>{{ task.start_date }}</td>
                                 <td>{{ task.due_date }}</td>
                                 <td>{{ task.is_completed|yesno:"yes, no" }}</td>
+                                <td>
+                                    <a href="{% url 'task_list_update' task.id %}">Edit</a>
+                                </td>
+                                <td>
+                                    <a href="{% url 'task_list_delete' task.id %}">Delete</a>
+                                </td>
                             </tr>
                         {% endfor %}
                     </tbody>

@@ -9,6 +9,8 @@ class TaskForm(ModelForm):
             "name",
             "start_date",
             "due_date",
+            "is_completed",
+            "color",
             "project",
             "assignee",
         )

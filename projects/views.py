@@ -39,3 +39,32 @@ def create_project(request):
         "form": form,
     }
     return render(request, "projects/create.html", context)
+
+
+@login_required
+def project_list_update(request, id):
+    project_list_object = get_object_or_404(Project, id=id)
+    if request.method == "POST":
+        form = ProjectForm(request.POST, instance=project_list_object)
+        if form.is_valid():
+            list = form.save()
+            return redirect("show_project", id=list.id)
+    else:
+        form = ProjectForm(instance=project_list_object)
+    context = {
+        "project_list_object": project_list_object,
+        "form": form,
+    }
+    return render(request, "projects/edit.html", context)
+
+
+@login_required
+def project_list_delete(request, id):
+    model_instance = Project.objects.get(id=id)
+    if request.method == "POST":
+        model_instance.delete()
+        return redirect("list_projects")
+    context = {
+        "project_detail": get_object_or_404(Project, id=id)
+    }
+    return render(request, "projects/delete.html", context)

@@ -10,6 +10,7 @@ class Task(models.Model):
     start_date = models.DateTimeField()
     due_date = models.DateTimeField()
     is_completed = models.BooleanField(default=False)
+    color = models.CharField(max_length=7, default="green")
     project = models.ForeignKey(
         Project,
         related_name="tasks",

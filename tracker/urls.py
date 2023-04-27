@@ -29,4 +29,5 @@ urlpatterns = [
     path("", redirect_to_home, name="home"),
     path("accounts/", include("accounts.urls")),
     path("tasks/", include("tasks.urls")),
+    path("cal/", include("cal.urls")),
 ]

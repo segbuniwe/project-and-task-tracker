@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from tasks.forms import TaskForm
 from tasks.models import Task
-
+from projects.models import Project
 
 # Create your views here.
 
@@ -16,6 +16,9 @@ def create_task(request):
             return redirect("list_projects")
     else:
         form = TaskForm()
+        form.fields["project"].queryset = Project.objects.filter(
+            owner=request.user
+        )
     context = {
         "form": form,
     }
@@ -29,3 +32,32 @@ def list_tasks(request):
         "task_list": task_list,
     }
     return render(request, "tasks/list.html", context)
+
+
+@login_required
+def task_list_update(request, id):
+    task_list_object = get_object_or_404(Task, id=id)
+    if request.method == "POST":
+        form = TaskForm(request.POST, instance=task_list_object)
+        if form.is_valid():
+            form.save()
+            return redirect("show_my_tasks")
+    else:
+        form = TaskForm(instance=task_list_object)
+    context = {
+        "task_list_object": task_list_object,
+        "form": form,
+    }
+    return render(request, "tasks/edit.html", context)
+
+
+@login_required
+def task_list_delete(request, id):
+    model_instance = Task.objects.get(id=id)
+    if request.method == "POST":
+        model_instance.delete()
+        return redirect("show_my_tasks")
+    context = {
+        "task_detail": get_object_or_404(Task, id=id)
+    }
+    return render(request, "tasks/delete.html", context)

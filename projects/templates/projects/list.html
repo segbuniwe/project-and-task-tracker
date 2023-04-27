@@ -5,9 +5,9 @@
 {% endblock title %}
 {% block content %}
     <main>
-        <div>
+        <div class="project-list">
             <h1>My Projects</h1>
-            <p>
+            <p class="create-project">
                 <a href="{% url 'create_project' %}">Create A New Project</a>
             </p>
             {% if project_list|length == 0 %}
@@ -18,6 +18,8 @@
                         <tr>
                             <th>Name</th>
                             <th>Number of tasks</th>
+                            <th>Edit Project</th>
+                            <th>Delete Project</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -27,6 +29,12 @@
                                     <a href="{% url 'show_project' project.id %}">{{ project.name }}</a>
                                 </td>
                                 <td>{{ project.tasks.all|length }}</td>
+                                <td>
+                                    <a href="{% url 'project_list_update' project.id %}">Edit</a>
+                                </td>
+                                <td>
+                                    <a href="{% url 'project_list_delete' project.id %}">Delete</a>
+                                </td>
                             </tr>
                         {% endfor %}
                     </tbody>
