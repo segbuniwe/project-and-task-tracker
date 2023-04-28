@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Project Timeline
+{% endblock title %}
+
+{% comment %} {% block extra %}
+<style>
+    {% for task in project.tasks.all %}
+        {% if task.is_completed %}
+            .timeline:hover {
+                transform: scale(1.1);
+                background-color: lightgreen;
+            }
+        {% else %}
+            .timeline:hover {
+                transform: scale(1.1);
+                background-color: orangered;
+            }
+        {% endif %}
+    {% endfor %}
+</style>
+{% endblock extra %} {% endcomment %}
+
+{% block content %}
+<main>
+    <div>
+        <h1>Project Timeline: {{ project.name }}</h1>
+        <p class="task">Task count: {{ task_count }}</p>
+        <p class="task">Completed tasks: {{ completed_count }}</p>
+
+        {% for task in completed_tasks %}
+            <div class="timeline {% if task.is_completed %}completed-task{% endif %}">
+                <h2>{{ task.name }}</h2>
+                <p>Due date: {{ task.due_date }}</p>
+                <p>Assignee: {{ task.assignee }}</p>
+            </div>
+        {% empty %}
+            <p>No tasks found for this project.</p>
+        {% endfor %}
+    </div>
+</main>
+{% endblock content %}

@@ -3,7 +3,7 @@ from datetime import datetime, date, timedelta
 from django.http import HttpResponse
 from django.views import generic
 from django.utils.safestring import mark_safe
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 from tasks.models import Task

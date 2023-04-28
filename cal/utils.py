@@ -43,7 +43,7 @@ class Calendar(HTMLCalendar):
             cal += f'{self.formatweek(week, tasks)}\n'
         return cal
 
-    # tying to get tasks to turn green or whatever when task is completed
+    # trying to get tasks to turn green or whatever when task is completed
     # AHHHHHHHHHHHHHHHHH got that shit to work finally!!!!!!!!!!!!
 
     # def color_calendar(self):

@@ -225,3 +225,34 @@ table {
     padding: 0.25em 1em;
     text-align: center;
 }
+
+.task {
+    text-align: center;
+}
+
+.timeline {
+    transition: transform 0.5s ease-in-out;
+    text-align: center;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin: auto;
+    max-width: 400px;
+    padding: 2em;
+    border: 1px solid black;
+    animation: fadein 1s;
+}
+
+.timeline:hover .completed-task {
+    transform: scale(1.1);
+    background-color: lightgreen;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.completed-task {
+    background-color: #c8f7c5;
+}
