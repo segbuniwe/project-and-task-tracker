@@ -11,6 +11,7 @@
                 <table>
                     <thead>
                         <tr>
+                            <th>Project</th>
                             <th>Name</th>
                             <th>Start Date</th>
                             <th>Due Date</th>
@@ -23,6 +24,9 @@
                     <tbody>
                         {% for task in task_list.all %}
                             <tr>
+                                <td>
+                                    <a href="{% url 'show_project' task.id %}">{{ task.project }}</a>
+                                </td>
                                 <td>
                                     <a href="{% url 'show_task' task.id %}">{{ task.name }}</a>
                                 </td>
