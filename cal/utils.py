@@ -42,13 +42,3 @@ class Calendar(HTMLCalendar):
         for week in self.monthdays2calendar(self.year, self.month):
             cal += f'{self.formatweek(week, tasks)}\n'
         return cal
-
-    # trying to get tasks to turn green or whatever when task is completed
-    # AHHHHHHHHHHHHHHHHH got that shit to work finally!!!!!!!!!!!!
-
-    # def color_calendar(self):
-    #     tasks = Task.objects.all()
-    #     for task in tasks:
-    #         if task.is_completed is True:
-    #             cal = '<div style="background-color: green">{{ task.name }}</div>'
-    #     return cal
